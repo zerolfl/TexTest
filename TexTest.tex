@@ -1,0 +1,155 @@
+\documentclass{article}
+\usepackage{CJKutf8}
+\usepackage{url}
+\usepackage[colorlinks=true]{hyperref}
+\usepackage{fancyhdr}
+\usepackage{enumerate}
+\usepackage{color,xcolor}
+\usepackage{listings}
+\lstset{
+	basicstyle=\footnotesize, % size of fonts used for the code或改成\small\monaco稍大
+	numbers=left,                        % 设置行号
+	numberstyle=\tiny,            % 设置行号字体大小
+	columns=fullflexible,
+	breaklines=true,                 % automatic line breaking only at whitespace
+	captionpos=b,                    % sets the caption-position to bottom
+	tabsize=4,                       % 把tab扩展为4个空格，默认是8个太长
+	commentstyle=\color{mygreen},    % 设置注释颜色
+	escapeinside={\%*}{*)},          % if you want to add LaTeX within your code
+	keywordstyle=\color{blue},       % 设置keyword颜色
+	stringstyle=\color{mymauve},     % string literal style
+	frame=none,                                          % 不显示背景边框
+	backgroundcolor=\color[RGB]{245,245,244},            % 设定背景颜色
+	rulesepcolor=\color{red!20!green!20!blue!20},
+	language=c++,
+}
+
+% Math
+\newcommand{\keyframe}{k-\Delta{k}}
+\newcommand{\sd}[1]{\mathbf{#1}} % spatial domain
+\newcommand{\fd}[1]{\hat{\mathbf{#1}}} % Fourier domin
+\newcommand{\set}[2][n]{#2_1,#2_2,\dots,#2_#1}
+
+% Ranking
+\newcommand{\NoOne}[1]{\textcolor{red}{#1}}
+\newcommand{\NoTwo}[1]{\textcolor{green}{#1}}
+\newcommand{\NoThree}[1]{\textcolor{blue}{#1}}
+
+% Remark
+\newcounter{RNum}
+\renewcommand{\theRNum}{\arabic{RNum}}
+\newcommand{\Remark}{\noindent\textbf{Remark}~\refstepcounter{RNum}\textbf{\theRNum}: }
+
+\renewcommand{\abstractname}{摘要}
+
+%\fancypagestyle{plain}
+%\fancyhf{} % 清空当前设置
+
+\title{\LaTeX 测试手册}
+\date{}
+\author{Fuling~Lin\thanks{e-mail: linfuling5@tongji.edu.cn} ,
+	Yujie~He\thanks{Hompage: \url{https://yujie-he.github.io/}, e-mail: 1551862@tongji.edu.cn}
+}
+
+\begin{document}
+\begin{CJK}{UTF8}{gkai}
+
+
+\maketitle
+\begin{abstract}
+随手用来测试的\LaTeX 文件。
+\end{abstract}
+
+\section{命令内容}
+%使用如下命令免去写作繁琐输入：
+
+%{\centering
+%\texttt{$\backslash$newcommand\{新命令\}[参数数量][默认值]\{定义内容\}}。\par
+%}
+
+%要求如下：
+%\begin{itemize}
+%	\item 新命令：符合命令构成规则，不能与系统和已调用宏包命令重名。
+%	\item 参数数量：可选，用于指定该命令具有参数个数，默认为0，即无参数。
+%	\item 默认值：可选，用于设定第一个参数的默认值，如果定义时给出默认值，表命令第一个参数可选，新命令最多只能有一个可选参数，而且必须是第一个参数。
+%	\item 命令内容：涉及某个参数时用符号\#n表示，如\#1 \#2。
+%	\item 新定义命令参数不得含有抄录命令$\backslash$verb和抄录环境verbatim以及相关命令和环境。
+%\end{itemize}
+
+\subsection{定义数学符号}
+
+定义如下：
+\begin{lstlisting}
+\newcommand{\keyframe}{k-\Delta{k}}
+\newcommand{\sd}[1]{\mathbf{#1}} % spatial domain
+\newcommand{\fd}[1]{\hat{\mathbf{#1}}} % Fourier domin
+\newcommand{\set}[2][n]{#2_1,#2_2,\dots,#2_#1}
+\end{lstlisting}
+
+输入：
+\begin{lstlisting}
+$\sd{w} \rightarrow \fd{w}$,
+$\fd{w}^{\keyframe}$,
+$[\set[n]{\fd{w}}]$,
+$[\set[m]{\sd{x}}]$
+\end{lstlisting}
+
+编译效果如下：
+
+$\sd{w} \rightarrow \fd{w}$,
+$\fd{w}^{\keyframe}$,
+$[\set[n]{\fd{w}}]$,
+$[\set[m]{\sd{x}}]$.
+
+\subsection{定义带颜色内容}
+
+定义如下：
+\begin{lstlisting}
+\newcommand{\NoOne}[1]{\textcolor{red}{#1}}
+\newcommand{\NoTwo}[1]{\textcolor{green}{#1}}
+\newcommand{\NoThree}[1]{\textcolor{blue}{#1}}
+\end{lstlisting}
+
+输入：
+\begin{lstlisting}
+Xiaoming gets \NoOne{100}, 
+Xiaoxiong gets \NoTwo{98}, 
+Xiaoli gets only \NoThree{60}.
+\end{lstlisting}
+
+编译效果如下：
+
+Xiaoming gets \NoOne{100}, Xiaoxiong gets \NoTwo{98}, Xiaoli gets only \NoThree{60}.
+
+\subsection{自带编号}
+
+定义如下：
+\begin{lstlisting}
+\newcounter{RNum}
+\renewcommand{\theRNum}{\arabic{RNum}}
+\newcommand{\Remark}{\noindent\textbf{Remark}
+	~\refstepcounter{RNum}\textbf{\theRNum}: }
+\end{lstlisting}
+
+输入：
+\begin{lstlisting}
+\Remark Point 1\\
+\Remark Point 2\\
+\Remark Point 3
+\end{lstlisting}
+
+编译效果如下：
+
+\Remark Point 1\\
+\Remark Point 2\\
+\Remark Point 3
+
+\section{参考资料}
+\begin{enumerate}[1)]
+	\item \href{https://www.jianshu.com/p/9d53cc6a64b8}{\LaTeX 计数器}
+	\item \href{https://www.jianshu.com/p/a69116a7dbe1}{\LaTeX 自定义命令}
+\end{enumerate}
+
+
+\end{CJK}
+\end{document}
